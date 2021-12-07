@@ -9,3 +9,22 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Language {
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  title     String    @db.VarChar(50)
+  channels  Channel[]
+}
+
+model Channel {
+  id         Int      @id @default(autoincrement())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  name       String   @db.VarChar(255)
+  live_url   String   @db.VarChar(255)
+  banner     String   @db.VarChar(255)
+  language   Language @relation(fields: [languageId], references: [id])
+  languageId Int
+}
