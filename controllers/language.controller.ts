@@ -15,7 +15,7 @@ const create = async (req: Request, res: Response) => {
       message: "Language data created successfully",
     });
   } catch (err: any) {
-    console.log(err);
+    console.log(err.message);
     res.status(500).json({
       message: err?.message,
     });
